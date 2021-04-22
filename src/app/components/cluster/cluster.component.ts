@@ -27,7 +27,6 @@ export class ClusterComponent implements OnInit {
       Validators.required,
       Validators.min(5),
     ]),
-    //date (?)
   });
 
   editClusterForm = new FormGroup({
