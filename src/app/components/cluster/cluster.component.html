@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Pràctica Minim 1 EA</h1>
+      <p class="lead">Cluster manager // Juan Antonio Cárdenas</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h5>List of Clusters</h5> 
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-light" (click)="getClusters()">Refresh</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li *ngFor="let cluster of clusterList; let i = index"
+                    class="list-group-item list-group-item-action"
+                    (click)="getCluster(i)">
+                    {{ cluster.name }}
+                    </li>
+                </ul>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>Edit cluster</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="editClusterForm" (ngSubmit)="editCluster()">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input [class.is-invalid]="editClusterForm.get('clusterNameEdit').touched && editClusterForm.get('clusterNameEditt').invalid" 
+                        type="text" class="form-control" formControlName="clusterNameEdit" placeholder="Cluster name" [(ngModel)] = "selectedCluster.name">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input [class.is-invalid]="editClusterForm.get('clusterDescriptionEdit').touched && editClusterForm.get('clusterDescriptionEdit').invalid" 
+                        type="text" class="form-control" formControlName="clusterDescriptionEdit" placeholder="Cluster description" [(ngModel)] = "selectedCluster.description">
+                    </div>
+                    <div class="form-group">
+                        <label>Report Date</label>
+                        <input [class.is-invalid]="editClusterForm.get('clusterReportDateEdit').touched && editClusterForm.get('clusterReportDateEdit').invalid" 
+                        type="text" class="form-control" formControlName="clusterReportDateEdit" placeholder="Cluster report date" [(ngModel)] = "selectedCluster.reportdate">
+                    </div>
+                    <div class="span6" style="float: none; margin: 0 auto;">
+                        <button class="btn btn-info" type="submit" [disabled]="!editClusterForm.valid">Edit Cluster</button> 
+                    </div>
+                </form>
+            </div>
+          </div>
+    </div>
+    <div class="col-sm">
+        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">
+                <h5>Add new cluster</h5>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="addClusterForm" (ngSubmit)="addCluster()">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input [class.is-invalid]="addClusterForm.get('clusterNameInput').touched && addClusterForm.get('clusterNameInput').invalid" 
+                        type="text" class="form-control" formControlName="clusterNameInput" placeholder="Enter Cluster name">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input [class.is-invalid]="addClusterForm.get('clusterDescriptionInput').touched && addClusterForm.get('clusterDescriptionInput').invalid" 
+                        type="text" class="form-control" formControlName="clusterDescriptionInput" placeholder="Enter Cluster description">
+                    </div>
+                    <div class="span6" style="float: none; margin: 0 auto;">
+                        <button class="btn btn-info" type="submit" [disabled]="!addClusterForm.valid">Create Cluster</button> 
+                    </div>
+                </form>
+            </div>
+          </div>
+      </div>
+  </div>
